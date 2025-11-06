@@ -1,0 +1,146 @@
+{
+  "name": "codex-mcp-client",
+  "displayName": "Codex MCP Client",
+  "description": "Direct integration with Codex MCP server for enhanced code analysis and search",
+  "version": "0.0.1",
+  "publisher": "codex",
+  "engines": {
+    "vscode": "^1.105.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onChatParticipant:codex"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codex.hello",
+        "title": "Codex: Test Connection",
+        "icon": "$(heart)"
+      },
+      {
+        "command": "codex.search",
+        "title": "Codex: Search Code",
+        "icon": "$(search)"
+      },
+      {
+        "command": "codex.findSymbol",
+        "title": "Codex: Find Symbol",
+        "icon": "$(symbol-class)"
+      },
+      {
+        "command": "codex.openPanel",
+        "title": "Codex: Open Panel",
+        "icon": "$(output)"
+      },
+      {
+        "command": "codex.indexRepository",
+        "title": "Codex: Index Repository",
+        "icon": "$(database)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "codex.hello"
+        },
+        {
+          "command": "codex.search"
+        },
+        {
+          "command": "codex.findSymbol"
+        },
+        {
+          "command": "codex.openPanel"
+        },
+        {
+          "command": "codex.indexRepository"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "codex.search",
+          "group": "codex",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "codex.findSymbol",
+          "group": "codex"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Codex MCP Client",
+      "properties": {
+        "codex.serverPath": {
+          "type": "string",
+          "default": "Q:\\src\\Codex\\dist\\test-server.js",
+          "description": "Path to the Codex MCP test server (lightweight mode)"
+        },
+        "codex.fullServerPath": {
+          "type": "string",
+          "default": "Q:\\src\\Codex\\dist\\index.js",
+          "description": "Path to the full Codex MCP server (advanced tools)"
+        },
+        "codex.serverMode": {
+          "type": "string",
+          "enum": ["test", "full"],
+          "default": "test",
+          "description": "Select which server mode to run: test (basic) or full (all tools)"
+        },
+        "codex.repoPath": {
+          "type": "string",
+          "default": "Q:\\src\\Codex",
+          "description": "Repository path passed to the MCP server (REPO_PATH env)"
+        },
+        "codex.dbPath": {
+          "type": "string",
+          "default": "Q:\\src\\Codex\\codex.db",
+          "description": "Database file path passed to the MCP server (DB_PATH env)"
+        },
+        "codex.nodeCommand": {
+          "type": "string",
+          "default": "node",
+          "description": "Node.js command to run the MCP server"
+        },
+        "codex.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start the MCP server when VS Code opens"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.105.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3"
+  }
+}
