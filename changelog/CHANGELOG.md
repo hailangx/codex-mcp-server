@@ -6,6 +6,13 @@ The format is based on the GitHub Copilot Instructions guidelines with detailed 
 
 ## 2025-11-06
 
+### [11:30] [GitHub Repository Creation and Initial Release](2025-11-06-1130-github-repository-creation.md)
+- Created public GitHub repository: https://github.com/hailangx/codex-mcp-server
+- Committed all project files (68 files, 10,480 insertions) with comprehensive initial commit
+- Established proper git configuration for Windows development (CRLF handling)
+- Integrated VS Code extension into main repository structure
+- **Result**: Repository live ✅, all code committed ✅, ready for collaboration ✅
+
 ### [11:00] [VS Code Chat Participant Integration](2025-11-06-1100-chat-participant-integration.md)
 - Added @codex chat participant for direct VS Code Chat interaction with MCP tools
 - Extended extension config (serverMode, fullServerPath, repoPath, dbPath) and dynamic tool selection
